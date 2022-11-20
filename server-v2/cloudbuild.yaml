@@ -1,30 +1,12 @@
 steps:
-  - name: 'gcr.io/cloud-builders/docker'
+  - name: 'node:18'
+    entrypoint: yarn
     args:
-      [
-        'build',
-        '-t',
-        'gcr.io/eo-production-313307/eo-api',
-        '-f',
-        './server-v2/prod.Dockerfile',
-        '.',
-      ]
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/eo-production-313307/eo-api']
-  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-    entrypoint: gcloud
+      - install
+    dir: api
+  - name: 'node:18'
+    entrypoint: yarn
     args:
-      [
-        'run',
-        'deploy',
-        'eo-api',
-        '--image',
-        'gcr.io/eo-production-313307/eo-api',
-        '--region',
-        'asia-northeast1',
-        '--platform',
-        'managed',
-        '--min-instances=1'
-      ]
-images:
-  - gcr.io/eo-production-313307/eo-api
+      - build
+    dir: api
+    env:
