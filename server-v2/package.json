@@ -31,7 +31,8 @@
     "forever": "^4.0.3",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
-    "rxjs": "^7.2.0"
+    "rxjs": "^7.2.0",
+    "@vercel/ncc": "^0.34.0"
   },
   "devDependencies": {
     "@nestjs/cli": "^8.0.0",
