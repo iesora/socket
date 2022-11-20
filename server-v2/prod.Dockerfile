@@ -1,9 +1,9 @@
 FROM node:13.7 AS builder
 WORKDIR /eo-api
-COPY ./server/package*.json /eo-api/
-COPY ./server/yarn.lock /eo-api/
+COPY ./server-v2/package*.json /eo-api/
+COPY ./server-v2/yarn.lock /eo-api/
 RUN yarn
-COPY ./server /eo-api/
+COPY ./server-v2 /eo-api/
 RUN yarn build
 
 FROM node:14-alpine
