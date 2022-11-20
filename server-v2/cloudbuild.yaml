@@ -22,6 +22,5 @@ steps:
       'asia-northeast1',
       '--platform',
       'managed',
-      '--min-instances=0',
+      '--min-instances=1',
     ]
-  dir: server-v2
