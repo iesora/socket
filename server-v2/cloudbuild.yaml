@@ -3,10 +3,10 @@ steps:
     entrypoint: yarn
     args:
       - install
-    dir: api
+    dir: server-v2
   - name: 'node:18'
     entrypoint: yarn
     args:
       - build
-    dir: api
+    dir: server-v2
     env:
