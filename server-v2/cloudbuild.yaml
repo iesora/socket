@@ -1,26 +1,30 @@
 steps:
-  - name: 'node:18'
-    entrypoint: yarn
+  - name: 'gcr.io/cloud-builders/docker'
     args:
-      - install
-    dir: server-v2
-  - name: 'node:18'
-    entrypoint: yarn
+      [
+        'build',
+        '-t',
+        'gcr.io/eo-production-313307/eo-api',
+        '-f',
+        './server-v2/prod.Dockerfile',
+        '.',
+      ]
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/eo-production-313307/eo-api']
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
     args:
-      - build
-    dir: server-v2
-  - name: 'node:18'
-  entrypoint: gcloud
-  args:
-    [
-      'run',
-      'deploy',
-      'eo-api',
-      '--image',
-      'gcr.io/quantum-balm-292112/eo-api',
-      '--region',
-      'asia-northeast1',
-      '--platform',
-      'managed',
-      '--min-instances=1',
-    ]
+      [
+        'run',
+        'deploy',
+        'eo-api',
+        '--image',
+        'gcr.io/eo-production-313307/eo-api',
+        '--region',
+        'asia-northeast1',
+        '--platform',
+        'managed',
+        '--min-instances=1'
+      ]
+images:
+  - gcr.io/eo-production-313307/eo-api
